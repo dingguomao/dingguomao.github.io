@@ -10,58 +10,91 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR相机</title>
+  <title></title>
   <script src="./js/aframe.min.js"></script>
   <script src="./js/mindar-image-aframe.prod.js"></script>
-
   <script src="./js/vconsole.min.js"></script>
 </head>
 
 <body>
-  <div style="position: absolute; z-index: 1000">
-    <button id="example-start-button">重新加载</button>
-  </div>
-  <a-scene mindar-image="imageTargetSrc: ./targets2.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <!--<div style="position: absolute; z-index: 1000">-->
+  <!--  <button id="example-start-button">重新加载</button>-->
+  <!--</div>-->
+  <a-scene  id="paintandquest-scene" mindar-image="imageTargetSrc: https://qny.dingguomao.asia/arPhoto/mind/targets.mind; uiLoading:no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
-      <img id="paintandquest-preview" src="./images/opc.png" />
-      <img id="paintandquest-preview2" src="./images/2.png" />
-      <video id="paintandquest-video-mp4" autoplay="false" loop="false" src="./1234.mp4" playsinline webkit-playsinline></video>
+      <img id="paintandquest-preview" src="
+https://qny.dingguomao.asia/arPhoto/PIC/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240920190036.png" />
+      <img style="z-index:1001" id="paintandquest-preview2" src="./images/2.png" />
+      <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./1234.mp4" playsinline webkit-playsinline></video>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled:  false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
     <a-entity mindar-image-target="targetIndex: 0" mytarget>
       <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
-        <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0.1" height="0.552" width="1">
+        <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0.05" height="0.552" width="1">
         </a-image>
-        <a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.05" height="0.552" width="1">
+        <a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.1" height="0.552" width="1">
         </a-image>
         <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0 0"></a-video>
+        <!--<a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0.05" >-->
+        <!--</a-image>-->
+        <!--<a-image id="paintandquest-preview-button2" class="clickable" src="#paintandquest-preview2" alpha-test="0.5" position="0 0 0.1" >-->
+        <!--</a-image>-->
+        <!--<a-video id="paintandquest-video-link" webkit-playsinline playsinline  position="0 0 0"></a-video>-->
       </a-entity>
     </a-entity>
   </a-scene>
   <script>
-    const vConsole = new VConsole()
-    console.log(vConsole);
+    // const vConsole = new VConsole()
+    // console.log(vConsole);
+    const url = new URL(window.location.href);
+    const mindName = url.searchParams.get('mindName');
+    const picName = url.searchParams.get('picName');
+    const videoName = url.searchParams.get('videoName');
+    // const videoWidth = url.searchParams.get('videoWidth');
+    // const videoheight = url.searchParams.get('videoheight');
+    const mindSrc = "imageTargetSrc: https://qny.dingguomao.asia/arPhoto/mind/"+mindName+".mind;";
+    const picSrc = "https://qny.dingguomao.asia/arPhoto/PIC/"+picName;
+    const videoSrc = "https://qny.dingguomao.asia/arPhoto/video/"+videoName+".mp4";
+    console.log(mindSrc);
+    console.log(videoSrc);
   </script>
   <script>
     const portfolio = document.querySelector("#portfolio-panel");
     const video1 = document.querySelector("#paintandquest-video-mp4");
+    const videoLink = document.querySelector("#paintandquest-video-link");
+    const scene1 = document.querySelector("#paintandquest-scene");
+    const image1 = document.querySelector("#paintandquest-preview");
     const paintandquestPreviewButton = document.querySelector("#paintandquest-preview-button");
     const paintandquestPreviewButton2 = document.querySelector("#paintandquest-preview-button2");
+    var imgW=image1.width;
+    var imgH=image1.height;
+    console.log(imgW);
+    console.log(imgH);
     portfolio.setAttribute("visible", true);
-    video1.pause();
+    video1.setAttribute("src",videoSrc);
+    image1.setAttribute("src",picSrc)
+    // paintandquestPreviewButton.setAttribute("visible", false);
+    //video1.setAttribute("src","https://qny.dingguomao.asia/arPhoto/video/7d6a06e3da9b75da35ec58cbb415bb6c.mp4-a.m3u8");
+    scene1.setAttribute("mindar-image",mindSrc);
+    if (imgW/imgH > 1){
+        paintandquestPreviewButton.setAttribute("width","1");
+        paintandquestPreviewButton.setAttribute("height","1.5");
+        paintandquestPreviewButton2.setAttribute("width","1");
+        paintandquestPreviewButton2.setAttribute("height","1.5");
+        videoLink.setAttribute("width","1");
+        videoLink.setAttribute("height","1.5");
+    };
     let y = 0;
     let status = false;
 
 
-    paintandquestPreviewButton.addEventListener('click', () => {
+    paintandquestPreviewButton2.addEventListener('click', () => {
       if (status == false) {
-        // paintandquestPreviewButton.setAttribute("visible", false);
+        paintandquestPreviewButton.setAttribute("visible", false);
         const testVideo = document.createElement("video");
         const canplayWebm = testVideo.canPlayType('video/webm; codecs="vp8, vorbis"');
-        console.log(canplayWebm);
         if (canplayWebm == "") {
           document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
           document.querySelector("#paintandquest-video-mp4").play();
@@ -69,7 +102,7 @@
           paintandquestPreviewButton2.setAttribute("visible", false);
           document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
           document.querySelector("#paintandquest-video-mp4").play();
-          alert('播放')
+          // alert('播放')
           status = true
 
         }
@@ -83,13 +116,6 @@
       }
 
     });
-    portfolio.addEventListener("targetFound", event => {
-      console.log("target found");
-    });
-    // detect target lost
-    portfolio.addEventListener("targetLost", event => {
-      console.log("target lost");
-    });
     portfolio.setAttribute("position", "0 " + y + " -0.01");
 
 
@@ -101,14 +127,14 @@
         arSystem = sceneEl.systems["mindar-image-system"];
 
       });
-      const startButton = document.querySelector("#example-start-button");
-      startButton.addEventListener('click', () => {
-        console.log("start");
-        arSystem.start(); // start AR 
-        arSystem.pause(true);
-      });
+    //   const startButton = document.querySelector("#example-start-button");
+    //   startButton.addEventListener('click', () => {
+    //     console.log("start");
+    //     arSystem.start(); // start AR 
+    //     arSystem.pause(true);
+    //   });
       sceneEl.addEventListener("arReady", (event) => {
-        alert('AR引擎已启动')
+        //alert('AR引擎已启动')
       });
       sceneEl.addEventListener("arError", (event) => {
         alert('相机未启动成功！')
