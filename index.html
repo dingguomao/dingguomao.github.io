@@ -21,10 +21,10 @@
   <!--<div style="position: absolute; z-index: 1000">-->
   <!--  <button id="example-start-button">重新加载</button>-->
   <!--</div>-->
-  <a-scene  id="paintandquest-scene" mindar-image="imageTargetSrc: https://qny.dingguomao.asia/arPhoto/mind/targets.mind; uiLoading:no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <a-scene  id="paintandquest-scene" mindar-image="imageTargetSrc: https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/mind/ceshi001.mind; uiLoading:no;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
     <a-assets>
       <img id="paintandquest-preview" src="
-https://qny.dingguomao.asia/arPhoto/PIC/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240920190036.png" />
+https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/pic/ceshi001.png" />
       <img style="z-index:1001" id="paintandquest-preview2" src="./images/2.png" />
       <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./1234.mp4" playsinline webkit-playsinline></video>
     </a-assets>
@@ -54,9 +54,9 @@ https://qny.dingguomao.asia/arPhoto/PIC/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202
     const videoName = url.searchParams.get('videoName');
     // const videoWidth = url.searchParams.get('videoWidth');
     // const videoheight = url.searchParams.get('videoheight');
-    const mindSrc = "imageTargetSrc:https://mindar-1300311678.cos.ap-beijing.myqcloud.com/mind/"+mindName+".mind;";
-    const picSrc = "https://mindar-1300311678.cos.ap-beijing.myqcloud.com/pic/"+picName;
-    const videoSrc = "https://mindar-1300311678.cos.ap-beijing.myqcloud.com/"+videoName+".mp4";
+    const mindSrc = "imageTargetSrc:https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/mind/"+mindName+".mind;";
+    const picSrc = "https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/pic/"+picName;
+    const videoSrc = "https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/"+videoName+".mp4";
     console.log(mindSrc);
     console.log(videoSrc);
   </script>
