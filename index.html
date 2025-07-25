@@ -45,17 +45,15 @@
     </a-entity>
   </a-scene>
   <script>
-    // const vConsole = new VConsole()
-    // console.log(vConsole);
+    const vConsole = new VConsole()
+    console.log(vConsole);
     const url = new URL(window.location.href);
-    const mindName = url.searchParams.get('mindName');
-    const picName = url.searchParams.get('picName');
-    const videoName = url.searchParams.get('videoName');
+    const tName = url.searchParams.get('tName');
     // const videoWidth = url.searchParams.get('videoWidth');
     // const videoheight = url.searchParams.get('videoheight');
-    const mindSrc = "imageTargetSrc:https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/mind/"+mindName+".mind;";
-    const picSrc = "https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/pic/"+picName;
-    const videoSrc = "https://cloudrevedgm-1300311678.cos.ap-chengdu.myqcloud.com/video/"+videoName+".mp4";
+    const mindSrc = "imageTargetSrc:./mind/"+tName+".mind;";
+    const picSrc = "./pic/"+tName+".png"
+    const videoSrc = "./video/"+tName+".mp4";
     console.log(mindSrc);
     console.log(videoSrc);
   </script>
@@ -93,7 +91,7 @@
 
     paintandquestPreviewButton.addEventListener('click', () => {
       if (status == false) {
-        // paintandquestPreviewButton.setAttribute("visible", false);
+        paintandquestPreviewButton.setAttribute("visible", false);
         const testVideo = document.createElement("video");
         const canplayWebm = testVideo.canPlayType('video/webm; codecs="vp8, vorbis"');
         if (canplayWebm == "") {
